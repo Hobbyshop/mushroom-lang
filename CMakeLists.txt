@@ -3,4 +3,4 @@ project(mushroom)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(mushroom src/main.cpp)
+add_executable(mushroom src/main.cpp src/Lexer.cpp src/Lexer.h)

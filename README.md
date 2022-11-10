@@ -11,7 +11,7 @@ func main() {
     }
 }
 
-func say_something(name: String, text: string) {
+func say_something(name: string, text: string) {
     println("${name} said, ${text}")
 }
 

@@ -1,18 +1,27 @@
 #include <iostream>
 
-#include "Lexer.h"
+#include "lexer/Lexer.h"
 
-void gen_tokens(mushroom::Lexer lexer) {
-	lexer.add_token("FUNCTION", std::regex("func"));
+void gen_tokens(mushroom::Lexer &lexer) {
+	using mushroom::Token;
 
-	lexer.add_token("IF", std::regex("if"));
-	lexer.add_token("ELSE", std::regex("else"));
-
-	lexer.add_token("INT", std::regex("int"));
-	lexer.add_token("STRING", std::regex("string"));
+	lexer.add_token(Token("FUNCTION", std::regex("func")));
+	lexer.add_token(Token("VARIABLE", std::regex("var")));
+	lexer.add_token(Token("CONSTANT", std::regex("const")));
 }
 
 int main() {
-	std::cout << "Hello, World!" << std::endl;
+	std::string code = "var func const const func";
+
+	mushroom::Lexer lexer;
+	gen_tokens(lexer);
+
+	auto tokens = lexer.lex(code);
+	std::cout << "---------\n" << tokens.size() << "\n---------\n";
+
+	for (mushroom::Token t : tokens) {
+		std::cout << t.get_id() << '\n';
+	}
+
 	return 0;
 }

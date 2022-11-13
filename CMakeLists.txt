@@ -3,4 +3,4 @@ project(mushroom)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(mushroom src/main.cpp src/lexer/Lexer.cpp src/lexer/Lexer.h src/lexer/Tokens.h src/lexer/Tokens.cpp)
+add_executable(mushroom src/main.cpp src/lexer/Lexer.cpp src/lexer/Lexer.h src/lexer/Tokens.h src/lexer/Tokens.cpp src/App.cpp src/App.h)

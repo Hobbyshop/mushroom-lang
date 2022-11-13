@@ -9,6 +9,20 @@ func main() {
     if (name == "Bob") {
         println("Hello Bob")
     }
+    
+    var integer_variable: i32 = 8;
+    switch (integer_variable) {
+        case 5 {
+            break;
+        },
+        case 10, 9, 8 {
+            break;
+        },
+        case {      // will trigger if no other case is triggered
+            break;
+        }
+    }
+    
 }
 
 func say_something(name: string, text: string) {

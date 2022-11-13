@@ -4,7 +4,7 @@
 
 namespace mushroom {
 
-	void Lexer::add_token(Token token) {
+	void Lexer::add_token(const Token& token) {
 		available_tokens.push_back(token);
 	}
 
@@ -13,15 +13,19 @@ namespace mushroom {
 		std::string match_buffer;
 
 		while (!to_lex.empty()) {
-			match_buffer.append(to_lex.substr(0, 1));
-			to_lex = to_lex.substr(1, to_lex.size() - 1);
-
-			while (to_lex.rfind(' ', 0) == 0)
+			while (to_lex.at(0) == ' ')
 				to_lex.erase(0, 1);
+
+			pop_char(to_lex, match_buffer);
+
+			while (!to_lex.empty() && isdigit(to_lex.at(0))) {
+				pop_char(to_lex, match_buffer);
+			}
 
 			for (Token t : available_tokens) {
 				if (std::regex_match(match_buffer, t.get_pattern())) {
 					token_list.push_back(t.copy());
+
 					match_buffer = "";
 					break;
 				}
@@ -32,15 +36,9 @@ namespace mushroom {
 		return token_list;
 	}
 
-	Token Token::copy() {
-		return { id, pattern };
-	}
-
-	std::string Token::get_id() {
-		return id;
-	}
-	std::regex Token::get_pattern() {
-		return pattern;
+	void Lexer::pop_char(std::string& base, std::string& buffer) {
+		buffer.append(base.substr(0, 1));
+		base = base.substr(1, base.length() - 1);
 	}
 
 }

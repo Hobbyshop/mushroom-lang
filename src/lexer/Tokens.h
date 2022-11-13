@@ -11,7 +11,7 @@ namespace mushroom {
 		std::regex pattern;
 
 	public:
-		Token(std::string id, std::regex pattern);
+		Token(const std::string& id, const std::regex& pattern);
 		Token copy();
 
 		std::string get_id();

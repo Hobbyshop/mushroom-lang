@@ -10,16 +10,16 @@ func main() {
         println("Hello Bob")
     }
     
-    var integer_variable: i32 = 8;
+    var integer_variable: i32 = 8
     switch (integer_variable) {
         case 5 {
-            break;
+            break   // break is not needed after a case
         },
         case 10, 9, 8 {
-            break;
+            break
         },
         case {      // will trigger if no other case is triggered
-            break;
+            break
         }
     }
     

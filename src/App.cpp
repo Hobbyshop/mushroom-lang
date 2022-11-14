@@ -1,12 +1,12 @@
 #include "App.h"
 
-#include <iostream>
+#include <fstream>
 
 bool mushroom::App::run(char* args[]) {
 	Lexer lexer;
 	gen_lexer_tokens(lexer);
 
-	std::string sourcecode = "if (true) {}";    // TODO add read file
+	std::string sourcecode = read_file(args[1]);
 	std::vector<Token> tokens = lexer.lex(sourcecode);
 
 	for (auto& token : tokens) {
@@ -14,6 +14,25 @@ bool mushroom::App::run(char* args[]) {
 	}
 
 	return true;
+}
+
+std::string mushroom::App::read_file(const std::string& path) {
+	std::string content;
+	std::string line;
+
+	std::ifstream file(path);
+	if (!file.is_open()) {
+		std::cerr << "File is not been found!\n";
+		return "";
+	}
+
+	while (std::getline(file, line)) {
+		content.append(line).push_back('\n');
+	}
+
+	file.close();
+
+	return content;
 }
 
 void mushroom::App::gen_lexer_tokens(mushroom::Lexer &lexer) {
@@ -71,7 +90,7 @@ void mushroom::App::gen_lexer_tokens(mushroom::Lexer &lexer) {
 	lexer.add_token(Token("DOLLAR_SIGN", "$"));
 	lexer.add_token(Token("L_PAREN", "\\("));
 	lexer.add_token(Token("R_PAREN", "\\)"));
-	lexer.add_token(Token("L_BRACE", "\\{")); 
+	lexer.add_token(Token("L_BRACE", "\\{"));
 	lexer.add_token(Token("R_BRACE", "\\}"));
 	lexer.add_token(Token("L_BRACKET", "\\["));
 	lexer.add_token(Token("R_BRACKET", "\\]"));
@@ -80,7 +99,7 @@ void mushroom::App::gen_lexer_tokens(mushroom::Lexer &lexer) {
 	lexer.add_token(Token("NUMBER", "\\d+"));
 	lexer.add_token(Token("NAME", "\\w+"));
 	lexer.add_token(Token("STRING_CONTENT", R"((["])(?:(?=(\?))\2.)*?\1)"));
-	lexer.add_token(Token("CHARATER", R"((['])(?:(?=(\\?))\2.)*?\1)"));
+	lexer.add_token(Token("CHARACTER", R"((['])(?:(?=(\\?))\2.)*?\1)"));
 
 	// comments: (/\*([^*]|[\r\n]|(\*+([^*/]|[\r\n])))*\*+/)|(//.*)
 }

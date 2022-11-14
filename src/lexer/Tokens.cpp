@@ -2,7 +2,7 @@
 
 namespace mushroom {
 
-	Token::Token(const std::string& id, const std::regex& pattern) {
+	Token::Token(const std::string& id, const std::string& pattern) {
 		this->id = id;
 		this->pattern = pattern;
 	}
@@ -14,8 +14,12 @@ namespace mushroom {
 	std::string Token::get_id() {
 		return id;
 	}
-	std::regex Token::get_pattern() {
+	std::string Token::get_pattern() {
 		return pattern;
+	}
+
+	void Token::set_pattern(const std::string& new_pattern) {
+		this->pattern = new_pattern;
 	}
 
 }

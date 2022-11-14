@@ -1,6 +1,6 @@
 #include "Lexer.h"
 
-#include <iostream>
+#include <regex>
 
 namespace mushroom {
 
@@ -23,8 +23,10 @@ namespace mushroom {
 			}
 
 			for (Token t : available_tokens) {
-				if (std::regex_match(match_buffer, t.get_pattern())) {
-					token_list.push_back(t.copy());
+				if (std::regex_match(match_buffer, std::regex(t.get_pattern()))) {
+					Token token_copy = t.copy();
+					token_copy.set_pattern(match_buffer);
+					token_list.push_back(token_copy);
 
 					match_buffer = "";
 					break;

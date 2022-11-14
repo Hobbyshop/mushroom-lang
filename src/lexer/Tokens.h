@@ -1,21 +1,22 @@
 #pragma once
 
 #include <string>
-#include <regex>
 
 namespace mushroom {
 
 	class Token {
 	private:
 		std::string id;
-		std::regex pattern;
+		std::string pattern;
 
 	public:
-		Token(const std::string& id, const std::regex& pattern);
+		Token(const std::string& id, const std::string& pattern);
 		Token copy();
 
 		std::string get_id();
-		std::regex get_pattern();
+		std::string get_pattern();
+
+		void set_pattern(const std::string& new_pattern);
 	};
 
 }

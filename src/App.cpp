@@ -37,10 +37,10 @@ std::string mushroom::App::read_file(const std::string& path) {
 
 void mushroom::App::gen_lexer_tokens(mushroom::Lexer &lexer) {
 	// KEYWORDS //
-	lexer.add_token(Token("FUNCTION", "(func)"));
-	lexer.add_token(Token("RETURN", "(return)"));
-	lexer.add_token(Token("VARIABLE", "(var)"));
-	lexer.add_token(Token("CONSTANT", "(const)"));
+	lexer.add_token(Token("FUNCTION", "func"));
+	lexer.add_token(Token("RETURN", "return"));
+	lexer.add_token(Token("VARIABLE", "var"));
+	lexer.add_token(Token("CONSTANT", "const"));
 	lexer.add_token(Token("IF", "if"));
 	lexer.add_token(Token("ELSE", "else"));
 	lexer.add_token(Token("SWITCH", "switch"));
@@ -50,12 +50,19 @@ void mushroom::App::gen_lexer_tokens(mushroom::Lexer &lexer) {
 	lexer.add_token(Token("FALSE", "false"));
 
 	// OPERATORS //
+	lexer.add_token(Token("INCREMENT", R"(\+\+)"));
+	lexer.add_token(Token("DECREMENT", R"(\-\-)"));
+	lexer.add_token(Token("ADD_EQUALS", "\\+="));
+	lexer.add_token(Token("SUB_EQUALS", "\\-="));
+	lexer.add_token(Token("MUL_EQUALS", "\\*="));
+	lexer.add_token(Token("DIV_EQUALS", "\\/="));
 	lexer.add_token(Token("PLUS", "\\+"));
 	lexer.add_token(Token("MINUS", "\\-"));
 	lexer.add_token(Token("ASTERISK", "\\*"));
 	lexer.add_token(Token("SLASH", "\\/"));
-	lexer.add_token(Token("EQUALS", "="));
 	lexer.add_token(Token("EQUALS_CHECK", "=="));
+	lexer.add_token(Token("EQUALS", "="));
+	lexer.add_token(Token("NOT_EQUALS_CHECK", "!="));
 	lexer.add_token(Token("GREATER", "\\>"));
 	lexer.add_token(Token("GREATER_EQUALS", "\\>="));
 	lexer.add_token(Token("LESS", "\\<"));
@@ -63,12 +70,6 @@ void mushroom::App::gen_lexer_tokens(mushroom::Lexer &lexer) {
 	lexer.add_token(Token("AMPERSAND", "\\&"));
 	lexer.add_token(Token("PIPE", "\\|"));
 	lexer.add_token(Token("EXCLAMATION_MARK", "!"));
-	lexer.add_token(Token("INCREMENT", R"(\+\+)"));
-	lexer.add_token(Token("DECREMENT", R"(\-\-)"));
-	lexer.add_token(Token("ADD_EQUALS", "\\+="));
-	lexer.add_token(Token("SUB_EQUALS", "\\-="));
-	lexer.add_token(Token("MUL_EQUALS", "\\*="));
-	lexer.add_token(Token("DIV_EQUALS", "\\/="));
 
 	// DATA TYPES //
 	lexer.add_token(Token("INT_8", "i8"));
@@ -87,7 +88,7 @@ void mushroom::App::gen_lexer_tokens(mushroom::Lexer &lexer) {
 	lexer.add_token(Token("COMMA", ","));
 	lexer.add_token(Token("SEMICOLON", ";"));
 	lexer.add_token(Token("BACKSLASH", R"(\\)"));
-	lexer.add_token(Token("DOLLAR_SIGN", "$"));
+	lexer.add_token(Token("DOLLAR_SIGN", "\\$"));
 	lexer.add_token(Token("L_PAREN", "\\("));
 	lexer.add_token(Token("R_PAREN", "\\)"));
 	lexer.add_token(Token("L_BRACE", "\\{"));

@@ -8,39 +8,29 @@ namespace mushroom {
 		available_tokens.push_back(token);
 	}
 
-	std::vector<Token> Lexer::lex(std::string to_lex) {
+	std::vector<Token> Lexer::lex(std::string& to_lex) {
 		std::vector<Token> token_list;
-		std::string match_buffer;
 
 		while (!to_lex.empty()) {
-			while (to_lex.at(0) == ' ')
-				to_lex.erase(0, 1);
-
-			pop_char(to_lex, match_buffer);
-
-			while (!to_lex.empty() && isdigit(to_lex.at(0))) {
-				pop_char(to_lex, match_buffer);
-			}
+			to_lex = std::regex_replace(to_lex, std::regex(R"([ |\t|\n|\r|\v|\f]+)"), "");
 
 			for (Token t : available_tokens) {
-				if (std::regex_match(match_buffer, std::regex(t.get_pattern()))) {
-					Token token_copy = t.copy();
-					token_copy.set_pattern(match_buffer);
-					token_list.push_back(token_copy);
+				std::regex r(t.get_pattern());
+				std::smatch m;
 
-					match_buffer = "";
-					break;
+				std::regex_search(to_lex, m, r);
+
+				if (!to_lex.empty() && m.position(0) == 0) {
+					Token instance = t.copy();
+					instance.set_pattern(m.str(0));
+					token_list.push_back(instance);
+
+					to_lex = to_lex.erase(0, m.str(0).size());
 				}
 			}
-
 		}
 
 		return token_list;
-	}
-
-	void Lexer::pop_char(std::string& base, std::string& buffer) {
-		buffer.append(base.substr(0, 1));
-		base = base.substr(1, base.length() - 1);
 	}
 
 }

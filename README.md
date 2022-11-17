@@ -29,7 +29,7 @@ func say_something(name: string, text: string) {
     println("${name} said, ${text}")
 }
 
-func do_maths(x: int, y: int) int {
+func do_maths(x: i32, y: i32) i32 {
     return x + y
 }
 ```

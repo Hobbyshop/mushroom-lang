@@ -1,4 +1,4 @@
 func main() {
-    var integer = 100
+    var integer: i32 = 100
     println(integer)
 }

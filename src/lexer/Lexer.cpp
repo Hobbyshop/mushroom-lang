@@ -11,8 +11,10 @@ namespace mushroom {
 	std::vector<Token> Lexer::lex(std::string& to_lex) {
 		std::vector<Token> token_list;
 
+		to_lex = std::regex_replace(to_lex, std::regex(R"((/\*([^*]|[\r\n]|(\*+([^*/]|[\r\n])))*\*+/)|(//.*))"), "");		// remove comments
+
 		while (!to_lex.empty()) {
-			to_lex = std::regex_replace(to_lex, std::regex(R"([ |\t|\n|\r|\v|\f]+)"), "");
+			to_lex = std::regex_replace(to_lex, std::regex("^\\s+|\\s+$"), "");	// trim string
 
 			for (Token t : available_tokens) {
 				std::regex r(t.get_pattern());

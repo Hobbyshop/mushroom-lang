@@ -101,6 +101,4 @@ void mushroom::App::gen_lexer_tokens(mushroom::Lexer &lexer) {
 	lexer.add_token(Token("NAME", "\\w+"));
 	lexer.add_token(Token("STRING_CONTENT", R"((["])(?:(?=(\?))\2.)*?\1)"));
 	lexer.add_token(Token("CHARACTER", R"((['])(?:(?=(\\?))\2.)*?\1)"));
-
-	// comments: (/\*([^*]|[\r\n]|(\*+([^*/]|[\r\n])))*\*+/)|(//.*)
 }

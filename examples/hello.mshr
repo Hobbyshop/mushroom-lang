@@ -1,3 +1,4 @@
 func main() {
-    println(100)
+    var integer = 100
+    println(integer)
 }

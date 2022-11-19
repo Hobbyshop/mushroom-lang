@@ -35,7 +35,7 @@ func do_maths(x: i32, y: i32) i32 {
 ```
 
 ### Feature Roadmap
-* 🟢 Lexer
-* 🔴 Parser
-* 🔴 Interpreter
-* 🔴 Std Library
+* [x] Lexer
+* [ ] Parser
+* [ ] Interpreter
+* [ ] Std Library

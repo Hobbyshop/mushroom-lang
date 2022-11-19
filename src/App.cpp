@@ -1,6 +1,7 @@
 #include "App.h"
 
 #include <fstream>
+#include "logging/Logger.h"
 
 bool mushroom::App::run(char* args[]) {
 	Lexer lexer;
@@ -10,7 +11,7 @@ bool mushroom::App::run(char* args[]) {
 	std::vector<Token> tokens = lexer.lex(sourcecode);
 
 	for (auto& token : tokens) {
-		std::cout << "(" << token.get_id() << ", \"" << token.get_pattern() << "\")\n";
+		Logger::log("(" + token.get_id() + ", \"" + token.get_pattern() + "\")", mushroom::LogLevel::INFO);
 	}
 
 	return true;
@@ -22,7 +23,7 @@ std::string mushroom::App::read_file(const std::string& path) {
 
 	std::ifstream file(path);
 	if (!file.is_open()) {
-		std::cerr << "File is not been found!\n";
+		Logger::log("Could not find such file", LogLevel::ERROR);
 		return "";
 	}
 
